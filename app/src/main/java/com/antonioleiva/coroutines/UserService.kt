@@ -1,6 +1,6 @@
 package com.antonioleiva.coroutines
 
-import android.support.annotation.WorkerThread
+import androidx.annotation.WorkerThread
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
