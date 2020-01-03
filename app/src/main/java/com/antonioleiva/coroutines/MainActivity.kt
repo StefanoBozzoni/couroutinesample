@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope, pinRequest by PinActiv
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode==100) {
-            mainViewModel.myDeferred.complete("FINITO")
+            mainViewModel.myDeferred.complete("RETRY")
         }
         else
             mResult.complete(ActivityResult(resultCode,data))

@@ -21,6 +21,7 @@ class PinViewModel(
     fun initPinViewModel() {
         viewModelScope.launch(Dispatchers.Main) {
             var risultato: String
+            var counterRetry = 0
 
             do {
                 myDeferred = CompletableDeferred()
@@ -29,7 +30,9 @@ class PinViewModel(
                 useCaseSomeProcess.dispose()
                 Log.d("TAG", "usecase eseguito, risultato=${risultato.toString()}")
 
-                if (risultato == "Errore") {
+                if (counterRetry++==2)  //counterRetry should be passed to the usecase observer to send "FINITO" as result after error or success and after 2 retries
+                    risultato = "FINITO"
+                else if (risultato == "Errore") {
                     myDeferred.cancel()
                     Log.d("TAG", "domanda pin")
                     askPinLiveData.postValue("DOMANDA PIN") //activity is observing and asks a value
